@@ -9,12 +9,12 @@ this is a technical test for symfony
 # Installation
 
 ## build and up docker: 
-- build: `docker-composer compose build`
-- up: `docker-compose up -d`
+- build: `docker-compose build` *(or `docker compose build` for more recent docker version)*
+- up: `docker-compose up -d` *(`docker compose up -d`)*
   
 ## enter in docker:
 
-`docker-compose exec app_exam bash`
+`docker-compose exec app_exam bash` *(`docker compose exec app_exam bash`)*
 
 ## Install project:
 
