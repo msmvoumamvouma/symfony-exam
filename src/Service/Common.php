@@ -32,6 +32,6 @@ class Common
     {
         $r = array_filter(array_keys($array1), fn ($k) => !in_array($k, $array2));
 
-        return count($r) == 0;
+        return 0 == count($r);
     }
 }
