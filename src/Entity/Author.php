@@ -20,7 +20,7 @@ class Author
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ["persist"])]
     private ?ArrayCollection $books;
 
     public function __construct()
