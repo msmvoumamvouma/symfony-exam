@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
@@ -18,14 +19,16 @@ class Author
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([GroupName::READ, GroupName::WRITE])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[SerializedName('first_name')]
+    #[Groups([GroupName::READ, GroupName::WRITE])]
     private ?string $firstName = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ["persist"])]
-    #[Ignore]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ['persist'])]
+    #[Groups([GroupName::WRITE])]
     private ?ArrayCollection $books;
 
     public function __construct()
