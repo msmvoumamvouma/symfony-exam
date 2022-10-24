@@ -32,9 +32,9 @@ class BaseValidation
         return $result;
     }
 
-    private function executeValidationWith($value, $constraints = null): ConstraintViolationListInterface
+    private function executeValidationWith($value): ConstraintViolationListInterface
     {
-        return $this->validator->validate($value, $constraints, $this->groups);
+        return $this->validator->validate($value, null, $this->groups);
     }
 
     private function getViolationConstraint(object $theObject ): ConstraintViolationListInterface
