@@ -23,7 +23,6 @@ class Author
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[SerializedName('first_name')]
     #[Groups([GroupName::READ, GroupName::WRITE])]
     private ?string $firstName = null;
 
@@ -73,6 +72,16 @@ class Author
     public function setBooks(?ArrayCollection $books): self
     {
         $this->books = $books;
+
+        return $this;
+    }
+
+    public function addBook(Book $book): self
+    {
+        if (!$this->books->contains($book)) {
+            $book->setAuthor($this);
+            $this->books->add($book);
+        }
 
         return $this;
     }
