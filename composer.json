@@ -83,10 +83,11 @@
         }
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.12",
         "hautelook/alice-bundle": "^2.11",
         "overblog/graphiql-bundle": "^0.3.0",
         "phpstan/phpstan": "^1.8",
-        "symfony/maker-bundle": "^1.46",
-        "friendsofphp/php-cs-fixer": "^3.12"
+        "phpunit/phpunit": "^9.5",
+        "symfony/maker-bundle": "^1.46"
     }
 }
