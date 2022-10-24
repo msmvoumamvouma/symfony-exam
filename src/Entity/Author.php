@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
-use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 class Author
@@ -28,7 +27,10 @@ class Author
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ['persist'])]
     #[Groups([GroupName::WRITE])]
-    private ?ArrayCollection $books;
+    /**
+     * @var ArrayCollection<Book>
+     */
+    private $books;
 
     public function __construct()
     {
