@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\GroupName;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
@@ -24,9 +25,9 @@ class AuthorDenormalizer implements DenormalizerInterface
 
         $normalizer = new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
         /*** @var $author Author */
-        $author = $normalizer->denormalize($rawData, $type);
+        $author = $normalizer->denormalize($rawData, $type, null, GroupName::GROUPS_ONLY_WRITE);
         foreach ($rawBook as $item) {
-            $book = $normalizer->denormalize($item, Book::class);
+            $book = $normalizer->denormalize($item, Book::class, null, GroupName::GROUPS_ONLY_WRITE);
             $author->addBook($book);
         }
 
