@@ -38,4 +38,12 @@ class BookRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function allBookTitle()
+    {
+       $queryBuilder =  $this->createQueryBuilder('b');
+       $queryBuilder->select('b.title')->distinct();
+
+        return$queryBuilder->getQuery()->getResult();
+    }
 }
