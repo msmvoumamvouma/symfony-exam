@@ -17,6 +17,7 @@ class Book
     #[ORM\GeneratedValue]
     #[ORM\Column]
     #[GQL\Field(type: 'ID')]
+    #[Groups([GroupName::READ])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
