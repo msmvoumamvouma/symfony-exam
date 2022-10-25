@@ -30,7 +30,7 @@ class Author
     private ?string $firstName = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ['persist'])]
-    #[Groups([GroupName::WRITE])]
+    #[Groups([GroupName::WRITE, GroupName::READ])]
     #[Assert\Count(
         min: 1,
         minMessage: 'You must specify at least one book',
