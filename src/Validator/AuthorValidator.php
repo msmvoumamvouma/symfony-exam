@@ -10,13 +10,13 @@ class AuthorValidator extends BaseValidation
     /**
      * @throws ValidationException
      */
-    public function validate(object $theObject): array
+    public function validate(mixed $theObject): array
     {
         /*** @var $theObject Author */
         if ($theObject instanceof Author) {
             $violations = parent::validate($theObject);
             foreach ($theObject->getBooks() as $book) {
-                array_merge($violations, $this->validate($book));
+                array_merge($violations, parent::validate($book));
             }
 
             return $violations;

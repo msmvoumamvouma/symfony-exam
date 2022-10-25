@@ -42,7 +42,7 @@ class BaseValidation
         return $this->executeValidationWith($theObject);
     }
 
-    public function validate(object $theObject): array
+    public function validate(mixed $theObject): array
     {
         $violations = $this->getViolationConstraint($theObject);
 
