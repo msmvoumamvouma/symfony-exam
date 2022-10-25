@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\SearchBook;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,9 +13,9 @@ class BookController extends AbstractController
      * return all namme of books in json format.
      */
     #[Route('/books/list', name: 'list-of-my-books', methods: ['GET'], format: 'json')]
-    public function book()
+    public function book(SearchBook $searchBook)
     {
-        $allBookTitle  = [];
+        $allBookTitle  = $searchBook->retrieveAllBookTitle();
 
         return $this->json( $allBookTitle);
     }
