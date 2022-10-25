@@ -5,7 +5,8 @@ namespace App\Service;
 class Common
 {
     /**
-     * ???
+     * recursively retrieve all the values of an array using the reference of the array
+     * containing the final result in the callback function
      */
     public static function boo(array $array): array
     {
