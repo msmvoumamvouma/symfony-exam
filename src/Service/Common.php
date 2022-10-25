@@ -23,6 +23,9 @@ class Common
     /**
      * Merging two array, first array should not be associative,
      * second array must be associative with key k and value v
+     * @param array<int|string> $array1
+     * @param array{'k': mixed, "v": mixed} $array2
+     * @return array<mixed>
      */
     public static function foo(array $array1, array $array2): array
     {
