@@ -3,8 +3,8 @@
 namespace App\Tests\tests\Components\Validator;
 
 use App\Entity\Author;
-use App\Service\BaseValidation;
 use App\Tests\tests\Components\Utilities\ComponentFactory;
+use App\Validator\BaseValidation;
 use PHPUnit\Framework\TestCase;
 
 class AuthorValidatorForCreationTest extends TestCase

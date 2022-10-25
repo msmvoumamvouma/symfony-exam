@@ -4,7 +4,6 @@ namespace App\Validator;
 
 use App\Entity\Author;
 use App\Exceptions\ValidationException;
-use App\Service\BaseValidation;
 
 class AuthorValidator extends BaseValidation
 {
