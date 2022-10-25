@@ -38,3 +38,7 @@ Créer un fork et faire tous les exercices
  - [Exercice 2](exercices/exo-2.md)
  - [Exercice 3](exercices/exo-3.md)
  - [Exercice 4](exercices/exo-4.md)
+
+# Test
+
+Vous trouverez les tests dans le repertoire tests
