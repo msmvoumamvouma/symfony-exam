@@ -30,6 +30,11 @@ class Author
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ['persist'])]
     #[Groups([GroupName::WRITE])]
+    #[Assert\Count(
+        min: 1,
+        minMessage: 'You must specify at least one book',
+        groups: [GroupName::WRITE]
+    )]
     /**
      * @var ArrayCollection<Book>
      */
