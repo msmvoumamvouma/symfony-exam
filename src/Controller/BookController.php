@@ -10,7 +10,7 @@ class BookController extends AbstractController
     /**
      * return all namme of books in json format.
      */
-    #[Route('/books/list', name: 'list-of-my-books', methods: ['POST'], format: 'json')]
+    #[Route('/books/list', name: 'list-of-my-books', methods: ['GET'], format: 'json')]
     public function book()
     {
         $book = $this->container->get('doctrine.orm.default_entity_manager')->getRepository("App\Entity\Book")->findBy(['id' => 1]);
