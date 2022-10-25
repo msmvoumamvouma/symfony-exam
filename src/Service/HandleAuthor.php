@@ -13,15 +13,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class HandleAuthor
 {
-    private AuthorDenormalizer $authorDenormalizer;
-
     private AuthorRepository $authorRepository;
 
     private ValidatorInterface $validator;
 
-    public function __construct(AuthorDenormalizer $authorDenormalizer, AuthorRepository $authorRepository, ValidatorInterface $validator)
+    public function __construct(AuthorRepository $authorRepository, ValidatorInterface $validator)
     {
-        $this->authorDenormalizer = $authorDenormalizer;
 
         $this->authorRepository = $authorRepository;
 
