@@ -48,6 +48,6 @@ class SaveAuthorResponse
     #[Ignore]
     public function getErrorCode(): int
     {
-        return $this?->error?->getErrorCode() ?? 200;
+        return $this->error?->getErrorCode() ?? 200;
     }
 }
