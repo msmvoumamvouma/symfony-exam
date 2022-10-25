@@ -27,4 +27,12 @@ class FactorySerializer
 
         return new ObjectNormalizer($classMetadataFactory, $metadataAwareNameConverter);
     }
+
+    public static function ofSerializerFromAnnotation(): Serializer
+    {
+        return new Serializer(
+            [FactorySerializer::ofObjectNormalizer()],
+            [new JsonEncoder()]
+        );
+    }
 }
