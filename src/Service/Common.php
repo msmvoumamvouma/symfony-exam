@@ -35,6 +35,9 @@ class Common
     /**
      * Returns true if and only if the keys of the first
      * array are included (values) in the second array
+     * @param array<int|string, int|string> $array1
+     * @param array<int|string> $array2
+     * @return bool
      */
     public static function bar(array $array1, array $array2): bool
     {
