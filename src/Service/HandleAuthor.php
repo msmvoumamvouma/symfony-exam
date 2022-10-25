@@ -3,9 +3,13 @@
 namespace App\Service;
 
 use App\Entity\Author;
+use App\Entity\GroupName;
+use App\Exceptions\ValidationException;
 use App\Repository\AuthorRepository;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Serializer;
+use App\Response\ErrorResponse;
+use App\Response\SaveAuthorResponse;
+use App\Validator\AuthorValidator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class HandleAuthor
 {
@@ -13,21 +17,39 @@ class HandleAuthor
 
     private AuthorRepository $authorRepository;
 
-    public function __construct(AuthorDenormalizer $authorDenormalizer, AuthorRepository $authorRepository)
+    private ValidatorInterface $validator;
+
+    public function __construct(AuthorDenormalizer $authorDenormalizer, AuthorRepository $authorRepository, ValidatorInterface $validator)
     {
         $this->authorDenormalizer = $authorDenormalizer;
 
         $this->authorRepository = $authorRepository;
+
+        $this->validator = $validator;
     }
 
-    public function addAuthor(string $jsonInputData)
+    public function addAuthor(string $jsonInputData): SaveAuthorResponse
     {
-        $serializer = new Serializer(
-            [$this->authorDenormalizer],
-            [new JsonEncoder()]
-        );
+        $serializer = FactorySerializer::ofAuthorOnlyDenormalizer();
+
         /*** @var $author Author */
         $author = $serializer->deserialize($jsonInputData, Author::class, 'json');
-        $this->authorRepository->save($author, true);
+        $authorValidator = new AuthorValidator($this->validator, Author::class, [GroupName::WRITE]);
+        try {
+            $violationsMessage = $authorValidator->validate($author);
+            if (!empty($violationsMessage)) {
+                throw new ValidationException(implode(', ', array_values($violationsMessage)));
+            }
+
+            $this->authorRepository->save($author, true);
+
+            return new SaveAuthorResponse($author);
+        } catch (ValidationException $e) {
+            $error = new ErrorResponse('error', 'data validation', 'An validation error occurred', 400);
+
+            return new SaveAuthorResponse($author, $error);
+        } catch (\Throwable $ex) {
+            return new SaveAuthorResponse($author, new ErrorResponse('error', 'An internal error occurred', $ex->getMessage(), 500));
+        }
     }
 }

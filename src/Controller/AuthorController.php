@@ -26,11 +26,10 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/author', name: 'add_authors', methods: ['POST'])]
-    public function add(SerializerInterface $serializer, Request $request, HandleAuthor $handleAuthor): JsonResponse
+    public function add(Request $request, HandleAuthor $handleAuthor): JsonResponse
     {
-        $author = $serializer->deserialize($request->getContent(), Author::class, 'json', GroupName::GROUPS_ONLY_WRITE);
-        $handleAuthor->addAuthor($request->getContent());
+        $error = $handleAuthor->addAuthor($request->getContent());
 
-        return $this->json($author, 200, [], GroupName::GROUPS_ONLY_WRITE);
+        return $this->json($error, $error->getErrorCode(), [], ['groups' => [GroupName::READ]]);
     }
 }
