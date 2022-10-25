@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
@@ -36,7 +37,7 @@ class Author
         groups: [GroupName::WRITE]
     )]
     /**
-     * @var ArrayCollection<Book>
+     * @var Collection<Book>
      */
     private $books;
 
@@ -74,12 +75,12 @@ class Author
         return $this;
     }
 
-    public function getBooks(): ?ArrayCollection
+    public function getBooks(): ?Collection
     {
         return $this->books;
     }
 
-    public function setBooks(?ArrayCollection $books): self
+    public function setBooks(?Collection $books): self
     {
         $this->books = $books;
 
