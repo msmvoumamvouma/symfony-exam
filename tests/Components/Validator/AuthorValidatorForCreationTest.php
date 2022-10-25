@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\tests\Components\Validator;
+namespace App\Tests\Components\Validator;
 
 use App\Entity\Author;
-use App\Tests\tests\Components\Utilities\ComponentFactory;
+use App\Tests\Components\Utilities\ComponentFactory;
 use App\Validator\BaseValidation;
 use PHPUnit\Framework\TestCase;
 

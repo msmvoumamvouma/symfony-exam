@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\tests\Components\Utilities;
+namespace App\Tests\Components\Utilities;
 
 
 use Symfony\Component\Validator\Validation;

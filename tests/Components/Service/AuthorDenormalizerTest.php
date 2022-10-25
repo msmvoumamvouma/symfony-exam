@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\tests\Components\Service;
+namespace App\Tests\Components\Service;
 
 use App\Entity\Author;
 use App\Service\AuthorDenormalizer;
