@@ -37,16 +37,15 @@ class BaseValidation
         return $this->validator->validate($value, null, $this->groups);
     }
 
-    private function getViolationConstraint(object $theObject ): ConstraintViolationListInterface
+    private function getViolationConstraint(object $theObject): ConstraintViolationListInterface
     {
-
         return $this->executeValidationWith($theObject);
     }
 
     public function validate(object $theObject): array
     {
-        $violations = $this->getViolationConstraint($theObject );
+        $violations = $this->getViolationConstraint($theObject);
 
-       return  $this->readViolations( $violations);
+        return $this->readViolations($violations);
     }
 }
