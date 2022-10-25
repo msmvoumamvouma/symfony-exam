@@ -73,6 +73,9 @@
         ],
         "fix": [
             "php-cs-fixer fix -v src"
+        ],
+        "test-fix": [
+            "php-cs-fixer fix -v tests"
         ]
     },
     "conflict": {
