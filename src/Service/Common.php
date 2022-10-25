@@ -19,7 +19,8 @@ class Common
     }
 
     /**
-     * ???
+     * Merging two array, first array should not be associative,
+     * second array must be associative with key k and value v
      */
     public static function foo(array $array1, array $array2): array
     {
