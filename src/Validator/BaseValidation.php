@@ -37,7 +37,7 @@ class BaseValidation
         return $this->validator->validate($value, null, $this->groups);
     }
 
-    private function getViolationConstraint(object $theObject): ConstraintViolationListInterface
+    private function getViolationConstraint(mixed $theObject): ConstraintViolationListInterface
     {
         return $this->executeValidationWith($theObject);
     }
