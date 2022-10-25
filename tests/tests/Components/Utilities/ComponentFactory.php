@@ -12,7 +12,7 @@ class ComponentFactory
     public static function createValidator(): RecursiveValidator | ValidatorInterface
     {
         return Validation::createValidatorBuilder()
-            ->enableAnnotationMapping(true)
+            ->enableAnnotationMapping()
             ->addDefaultDoctrineAnnotationReader()
             ->getValidator()
         ;
