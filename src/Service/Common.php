@@ -6,8 +6,10 @@ class Common
 {
     /**
      * recursively retrieve all the values of an array using the reference of the array
-     * containing the final result in the callback function
+     * containing the final result in the callback function.
+     *
      * @param array<string, mixed> $array
+     *
      * @return array<mixed>
      */
     public static function boo(array $array): array
@@ -22,9 +24,11 @@ class Common
 
     /**
      * Merging two array, first array should not be associative,
-     * second array must be associative with key k and value v
-     * @param array<int|string> $array1
+     * second array must be associative with key k and value v.
+     *
+     * @param array<int|string>             $array1
      * @param array{'k': mixed, "v": mixed} $array2
+     *
      * @return array<mixed>
      */
     public static function foo(array $array1, array $array2): array
@@ -34,15 +38,16 @@ class Common
 
     /**
      * Returns true if and only if the keys of the first
-     * array are included (values) in the second array
+     * array are included (values) in the second array.
+     *
      * @param array<int|string, int|string> $array1
-     * @param array<int|string> $array2
-     * @return bool
+     * @param array<int|string>             $array2
      */
     public static function bar(array $array1, array $array2): bool
     {
         $r = array_filter(array_keys($array1), fn ($k) => !in_array($k, $array2));
         dump($r);
+
         return 0 == count($r);
     }
 }
