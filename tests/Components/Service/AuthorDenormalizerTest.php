@@ -28,7 +28,7 @@ class AuthorDenormalizerTest extends TestCase
         }';
         $authorDenormalizer = new AuthorDenormalizer();
         $serializer = new Serializer(
-           [$authorDenormalizer],
+            [$authorDenormalizer],
             [new JsonEncoder()]
         );
         /*** @var $author Author */
