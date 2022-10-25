@@ -32,7 +32,16 @@ class CommonTest extends TestCase
         $result = Common::foo($numbers, $data);
         $expected = [...array_values($numbers), $keyName => $animals];
 
-        self::assertTrue(true);
         self::assertEquals($expected, $result);
+    }
+
+    public function testAllKeyFound()
+    {
+        $users = [
+            'username' => 'kent',
+            'firstName' => 'John',
+        ];
+        $result = Common::bar($users, [...array_keys($users), '4', '7', 'got']);
+        self::assertTrue($result);
     }
 }

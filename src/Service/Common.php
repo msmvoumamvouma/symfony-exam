@@ -28,12 +28,13 @@ class Common
     }
 
     /**
-     * ???
+     * Returns true if and only if the keys of the first
+     * array are included (values) in the second array
      */
     public static function bar(array $array1, array $array2): bool
     {
         $r = array_filter(array_keys($array1), fn ($k) => !in_array($k, $array2));
-
+        dump($r);
         return 0 == count($r);
     }
 }
