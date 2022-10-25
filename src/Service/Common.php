@@ -7,6 +7,8 @@ class Common
     /**
      * recursively retrieve all the values of an array using the reference of the array
      * containing the final result in the callback function
+     * @param array<string, mixed> $array
+     * @return array<mixed>
      */
     public static function boo(array $array): array
     {
