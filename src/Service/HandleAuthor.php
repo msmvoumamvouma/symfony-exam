@@ -19,7 +19,6 @@ class HandleAuthor
 
     public function __construct(AuthorRepository $authorRepository, ValidatorInterface $validator)
     {
-
         $this->authorRepository = $authorRepository;
 
         $this->validator = $validator;
