@@ -10,7 +10,7 @@ class CommonTest extends TestCase
     public function testRetrieveAllValueInRecursiveWay()
     {
         $animals = ['c' => 'chimpanzee', 'go' => 'gorilla', 'do' => 'Dogs'];
-        $numbers = ['1' => 1, '2' =>2, '3'=>3,  '4'=>4];
+        $numbers = ['1' => 1, '2' => 2, '3' => 3,  '4' => 4];
         $usersX = [
             'username' => 'kent',
             'firstName' => 'John',
