@@ -36,7 +36,7 @@ class SingleResponseFilterAuthorTest extends TestCase
         $result = $serializer->serialize($author, 'json', ['groups' => [GroupName::FILTERABLE]]);
 
         self::assertTrue(true);
-        $expected = '{"name":"kent","firstName":"beck","books":[{"title":"xp"},{"title":"tdd"}],"numberOfBook":2}';
+        $expected = '{"id":null,"name":"kent","firstName":"beck","books":[{"title":"xp"},{"title":"tdd"}],"numberOfBook":2}';
         self::assertEquals($expected, $result);
     }
 }
