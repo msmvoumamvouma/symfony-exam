@@ -41,9 +41,9 @@ class BookRepository extends ServiceEntityRepository
 
     public function allBookTitle()
     {
-       $queryBuilder =  $this->createQueryBuilder('b');
-       $queryBuilder->select('b.title')->distinct();
+        $queryBuilder = $this->createQueryBuilder('b');
+        $queryBuilder->select('b.title')->distinct();
 
-        return$queryBuilder->getQuery()->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 }
