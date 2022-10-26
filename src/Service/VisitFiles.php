@@ -30,10 +30,10 @@ class VisitFiles
      *
      * Return a list of every files filtered by given function.
      *
-     * @param TODO $root
-     * @param TODO $filterFn
+     * @param mixed $root
+     * @param mixed $filterFn
      *
-     * @return TODO
+     * @return mixed
      */
     public function visitFiles($root, callable $filterFn): void
     {
