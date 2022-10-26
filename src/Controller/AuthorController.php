@@ -2,27 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Author;
 use App\Entity\GroupName;
 use App\Service\HandleAddAuthor;
+use App\Service\SearchAllAuthors;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class AuthorController extends AbstractController
 {
     #[Route('/author', name: 'search_authors', methods: ['GET'])]
-    public function search(SerializerInterface $serializer, Request $request): JsonResponse
+    public function search(Request $request, SearchAllAuthors $searchAllAuthors): JsonResponse
     {
-        $context = ['groups' => [GroupName::READ]];
+        $params = $request->query->all();
+        $result = $searchAllAuthors->search($params);
 
-        $author = $serializer->deserialize($request->getContent(), Author::class, 'json',
-            $context
-        );
-
-        return $this->json($author, 200, [], $context);
+        return $this->json($result, 200, [], GroupName::GROUPS_ONLY_FILTERABLE);
     }
 
     #[Route('/author', name: 'add_authors', methods: ['POST'])]
