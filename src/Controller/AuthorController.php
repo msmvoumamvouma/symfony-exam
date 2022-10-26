@@ -21,7 +21,7 @@ class AuthorController extends AbstractController
         return $this->json($result, 200, [], GroupName::GROUPS_ONLY_FILTERABLE);
     }
 
-    #[Route('/author', name: 'add_authors', methods: ['POST'])]
+    #[Route('/author', name: 'add_authors', methods: ['POST'], format: 'json')]
     public function add(Request $request, HandleAddAuthor $handleAuthor): JsonResponse
     {
         $result = $handleAuthor->apply($request->getContent());
