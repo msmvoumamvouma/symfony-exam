@@ -4,48 +4,44 @@ namespace App\Service;
 
 use App\Entity\Author;
 use App\Entity\GroupName;
-use App\Exceptions\ValidationException;
 use App\Repository\AuthorRepository;
-use App\Response\ErrorResponse;
 use App\Response\SaveAuthorResponse;
 use App\Validator\AuthorValidator;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class HandleAuthor
+class HandleAuthor extends ApplyTreatment
 {
-    private AuthorRepository $authorRepository;
+    protected AuthorRepository $authorRepository;
 
-    private ValidatorInterface $validator;
+    protected ValidatorInterface $validator;
 
-    public function __construct(AuthorRepository $authorRepository, ValidatorInterface $validator)
+    public function __construct(AuthorRepository $authorRepository, ValidatorInterface $validator, LoggerInterface $logger)
     {
+        parent::__construct($validator, $logger);
         $this->authorRepository = $authorRepository;
 
         $this->validator = $validator;
     }
 
-    public function addAuthor(string $jsonInputData): SaveAuthorResponse
+    protected function deserialize(string $jsonData): mixed
     {
         $serializer = FactorySerializer::ofAuthorOnlyDenormalizer();
 
-        /*** @var $author Author */
-        $author = $serializer->deserialize($jsonInputData, Author::class, 'json');
-        $authorValidator = new AuthorValidator($this->validator, Author::class, [GroupName::WRITE]);
-        try {
-            $violationsMessage = $authorValidator->validate($author);
-            if (!empty($violationsMessage)) {
-                throw new ValidationException(implode(', ', array_values($violationsMessage)));
-            }
+        return $serializer->deserialize($jsonData, Author::class, 'json');
+    }
 
-            $this->authorRepository->save($author, true);
+    protected function doTheJob(mixed $resultDeserialization): SaveAuthorResponse
+    {
+        $this->authorRepository->save($resultDeserialization, true);
 
-            return new SaveAuthorResponse($author);
-        } catch (ValidationException $e) {
-            $error = new ErrorResponse('error', 'data validation', 'An validation error occurred', 400);
+        return new SaveAuthorResponse($resultDeserialization);
+    }
 
-            return new SaveAuthorResponse($author, $error);
-        } catch (\Throwable $ex) {
-            return new SaveAuthorResponse($author, new ErrorResponse('error', 'An internal error occurred', $ex->getMessage(), 500));
-        }
+    protected function makeValidation(mixed $resultDeserialization): array
+    {
+        $authorValidator = new AuthorValidator($this->validatorInterface, Author::class, [GroupName::WRITE]);
+
+        return $authorValidator->validate($resultDeserialization);
     }
 }
