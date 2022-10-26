@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Author;
 use App\Entity\GroupName;
-use App\Service\HandleAuthor;
+use App\Service\HandleAddAuthor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ class AuthorController extends AbstractController
     }
 
     #[Route('/author', name: 'add_authors', methods: ['POST'])]
-    public function add(Request $request, HandleAuthor $handleAuthor): JsonResponse
+    public function add(Request $request, HandleAddAuthor $handleAuthor): JsonResponse
     {
         $result = $handleAuthor->apply($request->getContent());
 

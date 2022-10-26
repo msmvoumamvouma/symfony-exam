@@ -10,7 +10,7 @@ use App\Validator\AuthorValidator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class HandleAuthor extends ApplyTreatment
+class HandleAddAuthor extends ApplyTreatment
 {
     protected AuthorRepository $authorRepository;
 
