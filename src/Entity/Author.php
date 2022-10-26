@@ -20,17 +20,17 @@ class Author
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([GroupName::READ, GroupName::WRITE])]
-    #[Assert\NotNull(groups: [GroupName::WRITE])]
+    #[Groups([GroupName::READ, GroupName::WRITE, GroupName::FILTERABLE])]
+    #[Assert\NotNull(groups: [GroupName::WRITE, GroupName::FILTERABLE])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([GroupName::READ, GroupName::WRITE])]
-    #[Assert\NotNull(groups: [GroupName::WRITE])]
+    #[Groups([GroupName::READ, GroupName::WRITE, GroupName::FILTERABLE])]
+    #[Assert\NotNull(groups: [GroupName::WRITE, GroupName::FILTERABLE])]
     private ?string $firstName = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Book::class, cascade: ['persist'])]
-    #[Groups([GroupName::WRITE, GroupName::READ])]
+    #[Groups([GroupName::WRITE, GroupName::READ, GroupName::FILTERABLE])]
     #[Assert\Count(
         min: 1,
         minMessage: 'You must specify at least one book',
@@ -97,6 +97,7 @@ class Author
         return $this;
     }
 
+    #[Groups([GroupName::FILTERABLE])]
     public function getNumberOfBook(): int
     {
         return $this->books->count();

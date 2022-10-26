@@ -22,7 +22,7 @@ class Book
 
     #[ORM\Column(length: 255)]
     #[GQL\Field]
-    #[Groups([GroupName::READ, GroupName::WRITE])]
+    #[Groups([GroupName::READ, GroupName::WRITE, GroupName::FILTERABLE])]
     #[Assert\NotNull(groups: [GroupName::WRITE])]
     private ?string $title = null;
 
