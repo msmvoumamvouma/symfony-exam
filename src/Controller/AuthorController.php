@@ -28,8 +28,8 @@ class AuthorController extends AbstractController
     #[Route('/author', name: 'add_authors', methods: ['POST'])]
     public function add(Request $request, HandleAuthor $handleAuthor): JsonResponse
     {
-        $error = $handleAuthor->addAuthor($request->getContent());
+        $result = $handleAuthor->addAuthor($request->getContent());
 
-        return $this->json($error, $error->getErrorCode(), [], ['groups' => [GroupName::READ]]);
+        return $this->json($result, $result->getErrorCode(), [], ['groups' => [GroupName::READ]]);
     }
 }
