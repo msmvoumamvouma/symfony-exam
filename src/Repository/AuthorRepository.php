@@ -39,6 +39,31 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
+    protected function getLikePattern(string $value): string
+    {
+        return '%'.mb_strtolower($value, 'UTF-8').'%';
+    }
+
+    public function searchAllAuthors(Author $entity)
+    {
+        $queryBuilder = $this->createQueryBuilder('a');
+        if (null !== $entity->getName()) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->like($queryBuilder->expr()->lower('a.name'), ':name'))
+                ->setParameter('name', $this->getLikePattern($entity->getName()))
+            ;
+        }
+
+        if (null !== $entity->getFirstName()) {
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->like($queryBuilder->expr()->lower('a.firstName'), ':firstName'))
+                ->setParameter('firstName', $this->getLikePattern($entity->getFirstName()))
+            ;
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */
