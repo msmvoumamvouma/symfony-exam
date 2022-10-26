@@ -6,7 +6,6 @@ use App\Repository\BookRepository;
 
 class SearchBook
 {
-
     private BookRepository $bookRepository;
 
     public function __construct(BookRepository $bookRepository)
@@ -14,9 +13,8 @@ class SearchBook
         $this->bookRepository = $bookRepository;
     }
 
-
     public function retrieveAllBookTitle(): array
     {
-       return  $this->bookRepository->allBookTitle();
+        return $this->bookRepository->allBookTitle();
     }
 }
