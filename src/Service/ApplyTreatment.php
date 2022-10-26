@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Exceptions\ValidationException;
 use App\Response\ErrorResponse;
-use App\Response\SaveAuthorResponse;
+use App\Response\TreatmentResponse;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
@@ -28,7 +28,7 @@ abstract class ApplyTreatment
     /**
      * @throws Exception
      */
-    abstract protected function doTheJob(mixed $resultDeserialization): SaveAuthorResponse;
+    abstract protected function doTheJob(mixed $resultDeserialization): TreatmentResponse;
 
     /**
      * @return array<string, string>
@@ -37,17 +37,17 @@ abstract class ApplyTreatment
      */
     abstract protected function makeValidation(mixed $resultDeserialization): array;
 
-    protected function createErrorWhenDecodeDataFailed(): SaveAuthorResponse
+    protected function createErrorWhenDecodeDataFailed(): TreatmentResponse
     {
-        return new SaveAuthorResponse([], new ErrorResponse('error', 'data-format', 'An error occurred when decode data', 400));
+        return new TreatmentResponse([], new ErrorResponse('error', 'data-format', 'An error occurred when decode data', 400));
     }
 
-    protected function handleFailedToEncodeValue(): SaveAuthorResponse
+    protected function handleFailedToEncodeValue(): TreatmentResponse
     {
         return $this->createErrorWhenDecodeDataFailed();
     }
 
-    protected function handleTypeError(): SaveAuthorResponse
+    protected function handleTypeError(): TreatmentResponse
     {
         return $this->createErrorWhenDecodeDataFailed();
     }
@@ -74,11 +74,11 @@ abstract class ApplyTreatment
         } catch (ValidationException $e) {
             $error = new ErrorResponse('error', 'data validation', $e->getMessage(), 400);
 
-            return new SaveAuthorResponse($resultDeserialization, $error);
+            return new TreatmentResponse($resultDeserialization, $error);
         } catch (\Throwable $ex) {
             $this->logger->error($ex->getMessage());
 
-            return new SaveAuthorResponse($resultDeserialization, new ErrorResponse('error', 'internal error', 'An internal error occurred', 500));
+            return new TreatmentResponse($resultDeserialization, new ErrorResponse('error', 'internal error', 'An internal error occurred', 500));
         }
     }
 }

@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Entity\Book;
 use App\Model\UpdateBookSuffix;
 use App\Repository\BookRepository;
-use App\Response\SaveAuthorResponse;
+use App\Response\TreatmentResponse;
 use App\Validator\BaseValidation;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -59,18 +59,18 @@ class HandleAddSuffixToAllBook extends ApplyTreatment
     /**
      * @throws Exception
      */
-    protected function addSuffixToAllBook(UpdateBookSuffix $bookSuffix): SaveAuthorResponse
+    protected function addSuffixToAllBook(UpdateBookSuffix $bookSuffix): TreatmentResponse
     {
         $suffix = $bookSuffix->getSuffix();
         $books = $this->applyUpdateToDatabase($suffix);
 
-        return new SaveAuthorResponse($books);
+        return new TreatmentResponse($books);
     }
 
     /**
      * @throws Exception
      */
-    protected function doTheJob(mixed $resultDeserialization): SaveAuthorResponse
+    protected function doTheJob(mixed $resultDeserialization): TreatmentResponse
     {
         return $this->addSuffixToAllBook($resultDeserialization);
     }

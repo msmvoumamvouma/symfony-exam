@@ -6,7 +6,7 @@ use App\Entity\GroupName;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
-class SaveAuthorResponse
+class TreatmentResponse
 {
     #[Groups([GroupName::READ, GroupName::READ])]
     private ?ErrorResponse $error;

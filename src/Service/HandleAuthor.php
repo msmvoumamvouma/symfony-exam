@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Entity\Author;
 use App\Entity\GroupName;
 use App\Repository\AuthorRepository;
-use App\Response\SaveAuthorResponse;
+use App\Response\TreatmentResponse;
 use App\Validator\AuthorValidator;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -31,11 +31,11 @@ class HandleAuthor extends ApplyTreatment
         return $serializer->deserialize($jsonData, Author::class, 'json');
     }
 
-    protected function doTheJob(mixed $resultDeserialization): SaveAuthorResponse
+    protected function doTheJob(mixed $resultDeserialization): TreatmentResponse
     {
         $this->authorRepository->save($resultDeserialization, true);
 
-        return new SaveAuthorResponse($resultDeserialization);
+        return new TreatmentResponse($resultDeserialization);
     }
 
     protected function makeValidation(mixed $resultDeserialization): array
